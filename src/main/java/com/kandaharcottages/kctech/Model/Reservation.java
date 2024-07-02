@@ -1,7 +1,5 @@
 package com.kandaharcottages.kctech.Model;
 
-import java.util.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -12,11 +10,11 @@ public class Reservation {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
-    private String type;
-    private Date date;
-    private Date checkIn;
-    private Date checkOut;
+    private Long userId;
+    private Long accommodationId;
+    private String date;
+    private String checkIn;
+    private String checkOut;
     private int guest;
     private double total;
 
@@ -24,16 +22,17 @@ public class Reservation {
 
     public Reservation (){}
 
-    
-    public Reservation(String name, String type, Date date, Date checkIn, Date checkOut, int guest, double total) {
-        this.name = name;
-        this.type = type;
+
+
+    public Reservation(Long userId, Long accommodationId, String date, String checkIn, String checkOut, int guest,
+            double total) {
+        this.userId = userId;
+        this.accommodationId = accommodationId;
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.guest = guest;
         this.total = total;
-    
     }
 
     //getters
@@ -41,23 +40,23 @@ public class Reservation {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public Long getUserId() {
+        return userId;
     }
 
-    public String getType() {
-        return type;
+    public Long getAccommodationId() {
+        return accommodationId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public Date getCheckIn() {
+    public String getCheckIn() {
         return checkIn;
     }
 
-    public Date getCheckOut() {
+    public String getCheckOut() {
         return checkOut;
     }
 
@@ -69,24 +68,24 @@ public class Reservation {
         return total;
     }
 
-    //setters
-    public void setName(String name) {
-        this.name = name;
+    //Setters
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAccommodationId(Long accommodationId) {
+        this.accommodationId = accommodationId;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
 
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
 

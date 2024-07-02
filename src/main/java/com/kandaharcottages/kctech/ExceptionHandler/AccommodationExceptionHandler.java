@@ -11,7 +11,7 @@ import com.kandaharcottages.kctech.NotFoundException.AccommodationNotFoundExcept
 public class AccommodationExceptionHandler {
     @ExceptionHandler(AccommodationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(AccommodationNotFoundException e){
+    String accommodationNotFoundHandler(AccommodationNotFoundException e){
         return e.getMessage();
     }
 

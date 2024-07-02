@@ -11,7 +11,7 @@ import com.kandaharcottages.kctech.NotFoundException.ReservationNotFoundExceptio
 public class ReservationExceptionHandler {
     @ExceptionHandler(ReservationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(ReservationNotFoundException e){
+    String reservationNotFoundHandler(ReservationNotFoundException e){
         return e.getMessage();
     }
 
