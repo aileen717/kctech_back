@@ -15,7 +15,6 @@ public class Reservation {
     private String date;
     private String checkIn;
     private String checkOut;
-    private int guest;
     private double total;
 
 
@@ -24,14 +23,12 @@ public class Reservation {
 
 
 
-    public Reservation(Long userId, Long accommodationId, String date, String checkIn, String checkOut, int guest,
-            double total) {
+    public Reservation(Long userId, Long accommodationId, String date, String checkIn, String checkOut, double total) {
         this.userId = userId;
         this.accommodationId = accommodationId;
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.guest = guest;
         this.total = total;
     }
 
@@ -60,10 +57,6 @@ public class Reservation {
         return checkOut;
     }
 
-    public int getGuest() {
-        return guest;
-    }
-
     public double getTotal() {
         return total;
     }
@@ -87,10 +80,6 @@ public class Reservation {
 
     public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
-    }
-
-    public void setGuest(int guest) {
-        this.guest = guest;
     }
 
     public void setTotal(double total) {
