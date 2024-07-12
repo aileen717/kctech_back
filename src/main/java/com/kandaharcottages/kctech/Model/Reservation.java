@@ -10,7 +10,7 @@ public class Reservation {
     @Id
     @GeneratedValue
     private Long id;
-    private Long userId;
+    private Long userDetailsId;
     private Long accommodationId;
     private String date;
     private String checkIn;
@@ -23,8 +23,8 @@ public class Reservation {
 
 
 
-    public Reservation(Long userId, Long accommodationId, String date, String checkIn, String checkOut, double total) {
-        this.userId = userId;
+    public Reservation(Long userDetailsId, Long accommodationId, String date, String checkIn, String checkOut, double total) {
+        this.userDetailsId = userDetailsId;
         this.accommodationId = accommodationId;
         this.date = date;
         this.checkIn = checkIn;
@@ -37,8 +37,8 @@ public class Reservation {
         return id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getUserDetailsId() {
+        return userDetailsId;
     }
 
     public Long getAccommodationId() {
@@ -62,8 +62,8 @@ public class Reservation {
     }
 
     //Setters
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserDetailsId(Long userDetailsId) {
+        this.userDetailsId = userDetailsId;
     }
 
     public void setAccommodationId(Long accommodationId) {

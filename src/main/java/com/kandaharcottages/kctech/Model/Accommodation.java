@@ -15,15 +15,17 @@ public class Accommodation {
     private String pax;
     private double price;
     private String status;
+    private String url;
 
     public Accommodation (){}
 
-    public Accommodation(String name, String type, String pax, double price, String status) {
+    public Accommodation(String name, String type, String pax, double price, String status, String url) {
         this.name = name;
         this.type = type;
         this.pax = pax;
         this.price = price;
         this.status = status;
+        this.url = url;
     }
 
     //getters
@@ -51,6 +53,10 @@ public class Accommodation {
         return status;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
     //setters
     public void setName(String name) {
         this.name = name;
@@ -72,5 +78,8 @@ public class Accommodation {
         this.status = status;
     }
     
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
 }
