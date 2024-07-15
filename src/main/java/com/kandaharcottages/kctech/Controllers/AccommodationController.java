@@ -49,7 +49,6 @@ public class AccommodationController {
         return repo.findById(id)
         .map(accommodation -> {
             accommodation.setName(newAccommodation.getName());
-            accommodation.setType(newAccommodation.getType());
             accommodation.setPax(newAccommodation.getPax());
             accommodation.setPrice(newAccommodation.getPrice());
             accommodation.setStatus(newAccommodation.getStatus());

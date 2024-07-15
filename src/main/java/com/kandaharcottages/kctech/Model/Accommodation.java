@@ -11,7 +11,6 @@ public class Accommodation {
     @GeneratedValue
     private Long id;
     private String name;
-    private String type;
     private String pax;
     private double price;
     private String status;
@@ -19,9 +18,8 @@ public class Accommodation {
 
     public Accommodation (){}
 
-    public Accommodation(String name, String type, String pax, double price, String status, String url) {
+    public Accommodation(String name, String pax, double price, String status, String url) {
         this.name = name;
-        this.type = type;
         this.pax = pax;
         this.price = price;
         this.status = status;
@@ -35,10 +33,6 @@ public class Accommodation {
 
     public String getName() {
         return name;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public String getPax() {
@@ -60,10 +54,6 @@ public class Accommodation {
     //setters
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public void setPax(String pax) {

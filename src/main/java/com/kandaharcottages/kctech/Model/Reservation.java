@@ -10,12 +10,13 @@ public class Reservation {
     @Id
     @GeneratedValue
     private Long id;
-    private Long userDetailsId;
+    private Long userAuthId;
     private Long accommodationId;
     private String date;
     private String checkIn;
     private String checkOut;
     private double total;
+    private String status;
 
 
 
@@ -23,13 +24,14 @@ public class Reservation {
 
 
 
-    public Reservation(Long userDetailsId, Long accommodationId, String date, String checkIn, String checkOut, double total) {
-        this.userDetailsId = userDetailsId;
+    public Reservation(Long userAuthId, Long accommodationId, String date, String checkIn, String checkOut, double total, String status) {
+        this.userAuthId = userAuthId;
         this.accommodationId = accommodationId;
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.total = total;
+        this.status = status;
     }
 
     //getters
@@ -37,8 +39,8 @@ public class Reservation {
         return id;
     }
 
-    public Long getUserDetailsId() {
-        return userDetailsId;
+    public Long getUserAuthId() {
+        return userAuthId;
     }
 
     public Long getAccommodationId() {
@@ -60,10 +62,13 @@ public class Reservation {
     public double getTotal() {
         return total;
     }
+    public String getStatus() {
+        return status;
+    }
 
     //Setters
-    public void setUserDetailsId(Long userDetailsId) {
-        this.userDetailsId = userDetailsId;
+    public void setUserAuthId(Long userAuthId) {
+        this.userAuthId = userAuthId;
     }
 
     public void setAccommodationId(Long accommodationId) {
@@ -84,6 +89,10 @@ public class Reservation {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
