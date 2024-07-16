@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Accommodation {
+public class Room {
     
     @Id
     @GeneratedValue
@@ -13,16 +13,16 @@ public class Accommodation {
     private String name;
     private String pax;
     private double price;
-    private String status;
+    private Boolean reserved; //true_reserved
     private String url;
 
-    public Accommodation (){}
+    public Room (){}
 
-    public Accommodation(String name, String pax, double price, String status, String url) {
+    public Room(String name, String pax, double price, Boolean reserved, String url) {
         this.name = name;
         this.pax = pax;
         this.price = price;
-        this.status = status;
+        this.reserved = reserved;
         this.url = url;
     }
 
@@ -43,8 +43,8 @@ public class Accommodation {
         return price;
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getReserved() {
+        return reserved;
     }
 
     public String getUrl() {
@@ -64,8 +64,8 @@ public class Accommodation {
         this.price = price;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setReserved(Boolean reserved) {
+        this.reserved = reserved;
     }
     
     public void setUrl(String url) {

@@ -1,5 +1,8 @@
 package com.kandaharcottages.kctech.Model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,10 +14,10 @@ public class Reservation {
     @GeneratedValue
     private Long id;
     private Long userAuthId;
-    private Long accommodationId;
-    private String date;
-    private String checkIn;
-    private String checkOut;
+    private Long roomId;
+    private LocalDate date;
+    private LocalTime checkIn;
+    private LocalTime checkOut;
     private double total;
     private String status;
 
@@ -24,9 +27,9 @@ public class Reservation {
 
 
 
-    public Reservation(Long userAuthId, Long accommodationId, String date, String checkIn, String checkOut, double total, String status) {
+    public Reservation(Long userAuthId, Long roomId, LocalDate date, LocalTime checkIn, LocalTime checkOut, double total, String status) {
         this.userAuthId = userAuthId;
-        this.accommodationId = accommodationId;
+        this.roomId = roomId;
         this.date = date;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -43,19 +46,19 @@ public class Reservation {
         return userAuthId;
     }
 
-    public Long getAccommodationId() {
-        return accommodationId;
+    public Long roomId() {
+        return roomId;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public String getCheckIn() {
+    public LocalTime getCheckIn() {
         return checkIn;
     }
 
-    public String getCheckOut() {
+    public LocalTime getCheckOut() {
         return checkOut;
     }
 
@@ -71,19 +74,19 @@ public class Reservation {
         this.userAuthId = userAuthId;
     }
 
-    public void setAccommodationId(Long accommodationId) {
-        this.accommodationId = accommodationId;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public void setCheckIn(String checkIn) {
+    public void setCheckIn(LocalTime checkIn) {
         this.checkIn = checkIn;
     }
 
-    public void setCheckOut(String checkOut) {
+    public void setCheckOut(LocalTime checkOut) {
         this.checkOut = checkOut;
     }
 
