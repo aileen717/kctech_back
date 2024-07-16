@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.kandaharcottages.kctech.NotFoundException.UserNotFoundException;
+import com.kandaharcottages.kctech.NotFoundException.RoomNotFoundException;
 
 @RestControllerAdvice
-public class UserExceptionHandler {
-    @ExceptionHandler(UserNotFoundException.class)
+public class RoomExceptionHandler {
+    @ExceptionHandler(RoomNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String userNotFoundHandler(UserNotFoundException e){
+    String roomNotFoundHandler(RoomNotFoundException e){
         return e.getMessage();
     }
 

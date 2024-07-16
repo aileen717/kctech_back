@@ -1,5 +1,8 @@
 package com.kandaharcottages.kctech.Model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,13 +13,15 @@ public class Reservation {
     @Id
     @GeneratedValue
     private Long id;
-    private Long userId;
-    private Long accommodationId;
-    private String date;
-    private String checkIn;
-    private String checkOut;
-    private int guest;
+    private Long userAuthId;
+    private Long roomId;
+    private LocalDate checkInDate;
+    private LocalTime checkInTime;
+    private LocalDate checkOutDate;
+    private LocalTime checkOutTime;;
     private double total;
+    private Boolean reserved;
+    private String status;
 
 
 
@@ -24,15 +29,18 @@ public class Reservation {
 
 
 
-    public Reservation(Long userId, Long accommodationId, String date, String checkIn, String checkOut, int guest,
-            double total) {
-        this.userId = userId;
-        this.accommodationId = accommodationId;
-        this.date = date;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
-        this.guest = guest;
+    public Reservation(Long userAuthId, Long roomId, LocalDate checkInDate, LocalTime checkInTime, LocalDate checkOutDate, 
+    LocalTime checkOutTime, double total, Boolean reserved, String status) {
+
+        this.userAuthId = userAuthId;
+        this.roomId = roomId;
+        this.checkInDate = checkInDate;
+        this.checkInTime = checkInTime;
+        this.checkOutDate = checkOutDate;
+        this.checkOutTime = checkOutTime;
         this.total = total;
+        this.reserved = reserved;
+        this.status = status;
     }
 
     //getters
@@ -40,61 +48,72 @@ public class Reservation {
         return id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getUserAuthId() {
+        return userAuthId;
     }
 
-    public Long getAccommodationId() {
-        return accommodationId;
+    public Long roomId() {
+        return roomId;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDate getCheckInDate() {
+        return checkInDate;
     }
 
-    public String getCheckIn() {
-        return checkIn;
+    public LocalTime getCheckInTime() {
+        return checkInTime;
+    }
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
     }
 
-    public String getCheckOut() {
-        return checkOut;
-    }
-
-    public int getGuest() {
-        return guest;
+    public LocalTime getCheckOutTime() {
+        return checkOutTime;
     }
 
     public double getTotal() {
         return total;
     }
+    public Boolean getReserved() {
+        return reserved;
+    }
+    public String getStatus() {
+        return status;
+    }
 
     //Setters
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserAuthId(Long userAuthId) {
+        this.userAuthId = userAuthId;
     }
 
-    public void setAccommodationId(Long accommodationId) {
-        this.accommodationId = accommodationId;
+    public void setRoomId(Long roomId) {
+        this.roomId = roomId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
     }
 
-    public void setCheckIn(String checkIn) {
-        this.checkIn = checkIn;
+    public void setCheckInTime(LocalTime checkInTime) {
+        this.checkInTime = checkInTime;
+    }
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 
-    public void setCheckOut(String checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public void setGuest(int guest) {
-        this.guest = guest;
+    public void setCheckOutTime(LocalTime checkOutTime) {
+        this.checkOutTime = checkOutTime;
     }
 
     public void setTotal(double total) {
         this.total = total;
+    }
+    public void setReserved(Boolean reserved) {
+        this.reserved = reserved;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
