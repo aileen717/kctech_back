@@ -15,10 +15,12 @@ public class Reservation {
     private Long id;
     private Long userAuthId;
     private Long roomId;
-    private LocalDate date;
-    private LocalTime checkIn;
-    private LocalTime checkOut;
+    private LocalDate checkInDate;
+    private LocalTime checkInTime;
+    private LocalDate checkOutDate;
+    private LocalTime checkOutTime;;
     private double total;
+    private Boolean reserved;
     private String status;
 
 
@@ -27,13 +29,17 @@ public class Reservation {
 
 
 
-    public Reservation(Long userAuthId, Long roomId, LocalDate date, LocalTime checkIn, LocalTime checkOut, double total, String status) {
+    public Reservation(Long userAuthId, Long roomId, LocalDate checkInDate, LocalTime checkInTime, LocalDate checkOutDate, 
+    LocalTime checkOutTime, double total, Boolean reserved, String status) {
+
         this.userAuthId = userAuthId;
         this.roomId = roomId;
-        this.date = date;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
+        this.checkInDate = checkInDate;
+        this.checkInTime = checkInTime;
+        this.checkOutDate = checkOutDate;
+        this.checkOutTime = checkOutTime;
         this.total = total;
+        this.reserved = reserved;
         this.status = status;
     }
 
@@ -50,20 +56,26 @@ public class Reservation {
         return roomId;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getCheckInDate() {
+        return checkInDate;
     }
 
-    public LocalTime getCheckIn() {
-        return checkIn;
+    public LocalTime getCheckInTime() {
+        return checkInTime;
+    }
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
     }
 
-    public LocalTime getCheckOut() {
-        return checkOut;
+    public LocalTime getCheckOutTime() {
+        return checkOutTime;
     }
 
     public double getTotal() {
         return total;
+    }
+    public Boolean getReserved() {
+        return reserved;
     }
     public String getStatus() {
         return status;
@@ -78,20 +90,26 @@ public class Reservation {
         this.roomId = roomId;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
     }
 
-    public void setCheckIn(LocalTime checkIn) {
-        this.checkIn = checkIn;
+    public void setCheckInTime(LocalTime checkInTime) {
+        this.checkInTime = checkInTime;
+    }
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 
-    public void setCheckOut(LocalTime checkOut) {
-        this.checkOut = checkOut;
+    public void setCheckOutTime(LocalTime checkOutTime) {
+        this.checkOutTime = checkOutTime;
     }
 
     public void setTotal(double total) {
         this.total = total;
+    }
+    public void setReserved(Boolean reserved) {
+        this.reserved = reserved;
     }
 
     public void setStatus(String status) {

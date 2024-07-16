@@ -51,7 +51,6 @@ public class RoomController {
             room.setName(newRoom.getName());
             room.setPax(newRoom.getPax());
             room.setPrice(newRoom.getPrice());
-            room.setReserved(newRoom.getReserved());
             room.setUrl(newRoom.getUrl());
             return repo.save(room);
         }).orElseGet(() -> {

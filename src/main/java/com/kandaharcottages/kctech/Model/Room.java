@@ -13,16 +13,14 @@ public class Room {
     private String name;
     private String pax;
     private double price;
-    private Boolean reserved; //true_reserved
     private String url;
 
     public Room (){}
 
-    public Room(String name, String pax, double price, Boolean reserved, String url) {
+    public Room(String name, String pax, double price, String url) {
         this.name = name;
         this.pax = pax;
         this.price = price;
-        this.reserved = reserved;
         this.url = url;
     }
 
@@ -43,10 +41,6 @@ public class Room {
         return price;
     }
 
-    public Boolean getReserved() {
-        return reserved;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -62,10 +56,6 @@ public class Room {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public void setReserved(Boolean reserved) {
-        this.reserved = reserved;
     }
     
     public void setUrl(String url) {
