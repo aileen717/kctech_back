@@ -1,13 +1,10 @@
 package com.kandaharcottages.kctech.Model;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToOne;
+
 
 @Entity
 public class UserDetails {
@@ -18,15 +15,9 @@ public class UserDetails {
     private String name;
     private String address;
     private String contact;
+    private Long userAuthId;
 
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "userAuth_userDetails",
-        joinColumns = @JoinColumn(name = "userDetails_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "userAuth_id", referencedColumnName = "id"))
-        private Long userAuthId;
-
-        public UserDetails(){}
+public UserDetails(){}
 
 
     public UserDetails(Long userAuthId, String name, String address, String contact) {
