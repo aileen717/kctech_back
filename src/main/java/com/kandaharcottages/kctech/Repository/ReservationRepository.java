@@ -9,42 +9,12 @@ import com.kandaharcottages.kctech.Model.Reservation;
 
 public interface ReservationRepository extends JpaRepository <Reservation, Long>{
 
-    // ISAHAN
     List<Reservation> findByRoomIdAndCheckInDate(Long roomId, LocalDate checkInDate);
-
-    //  okok MARAMIHAN
     List<Reservation> findByRoomIdAndCheckInDateBetween(Long roomId, LocalDate checkInDate, LocalDate checkOutDate);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-    //Query method to find reservations for a specific date and room
-    List<Reservation> findByDateAndRoomId(LocalDate date, Long roomId);
-
-    //Query method to find reservations for a date range and check if room is reserved
-    boolean existsByDateBetweenAndRoomIdAndReservedIsTrue(LocalDate startDate, LocalDate endDate, Long roomId);
-
-    // Find reservations by room ID and date range
-    List<Reservation> findByRoomIdAndCheckInDateLessThanEqualAndCheckOutDateGreaterThanEqual(
-        Long roomId, LocalDate checkInDate, LocalDate checkOutDate);
-
-    boolean existsByRoomIdAndCheckInDateAndReservedIsTrue(Long roomId, LocalDate checkInDate);
+    default boolean isRoomReserved(Long roomId, LocalDate checkInDate, LocalDate checkOutDate) {
+        boolean reservedOnDate = !findByRoomIdAndCheckInDate(roomId, checkInDate).isEmpty();
+        boolean reservedInRange = !findByRoomIdAndCheckInDateBetween(roomId, checkInDate, checkOutDate).isEmpty();
+        return reservedOnDate || reservedInRange;
+    } 
 }
-
