@@ -20,8 +20,8 @@ public class Reservation {
     private LocalDate checkOutDate;
     private LocalTime checkOutTime;;
     private double total;
-    private Boolean reserved;
-    private String status;
+    private Boolean reserved  = true;
+    private String status = "pending";
 
 
 
@@ -52,7 +52,7 @@ public class Reservation {
         return userAuthId;
     }
 
-    public Long roomId() {
+    public Long getRoomId() {
         return roomId;
     }
 
