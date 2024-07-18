@@ -1,7 +1,7 @@
 package com.kandaharcottages.kctech.Controllers;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,25 +44,25 @@ public class ReservationController {
     }
 
     @PostMapping("/new")
-    public String addReservation(@RequestBody Reservation newReservation) {
-        boolean isReserved = repo.isRoomReserved(
-            newReservation.getRoomId(),
-            newReservation.getCheckInDate(),
-            newReservation.getCheckInTime(),
-            newReservation.getCheckOutDate(),
-            newReservation.getCheckOutTime()
+public String addReservation(@RequestBody Reservation newReservation) {
+    boolean isAvailable = repo.isRoomAvailable(
+        newReservation.getRoomId(),
+        newReservation.getCheckInDate(),
+        newReservation.getCheckOutDate()
     );
     
-    if (isReserved) {
-        return "The room is already reserved for the selected dates and times.";
+    if (!isAvailable) {
+        return "The room is already reserved for the selected date(s).";
     }
 
-    newReservation.setReserved(true);
-    newReservation.setStatus("pending");
+    newReservation.setAvailable(true);
+    newReservation.setStatus("pending"); 
     
-    repo.save(newReservation);
+    repo.save(newReservation); 
+    
     return "A new reservation is created.";
 }
+
 
 
     @DeleteMapping("/delete/{id}")
@@ -71,16 +71,15 @@ public class ReservationController {
         return "The reservation is deleted.";
     }
 
-   @GetMapping("/check")
-    public boolean checkRoomReservation(
+    @GetMapping("/check")
+    public boolean checkRoomAvailability(
         @RequestParam Long roomId,
         @RequestParam LocalDate checkInDate,
-        @RequestParam LocalTime checkInTime,
-        @RequestParam LocalDate checkOutDate,
-        @RequestParam LocalTime checkOutTime) {
+        @RequestParam LocalDate checkOutDate) {
     
-    return repo.isRoomReserved(roomId, checkInDate, checkInTime, checkOutDate, checkOutTime);
-}
+        return repo.isRoomAvailable(roomId, checkInDate, checkOutDate);
+    }
+    
 
     @PutMapping("/{id}")
     public Reservation updateReservationStatus(@PathVariable Long id, @RequestBody Map<String, String> updates) {
@@ -94,6 +93,35 @@ public class ReservationController {
         }
     
         return repo.save(existingReservation);
+    }
+
+    @GetMapping("/reservedDates")
+    public List<ReservedDateRange> getReservedDates(@RequestParam Long roomId) {
+        List<Reservation> reservations = repo.findByRoomId(roomId);
+        List<ReservedDateRange> reservedDateRanges = new ArrayList<>();
+        
+        for (Reservation reservation : reservations) {
+            reservedDateRanges.add(new ReservedDateRange(reservation.getCheckInDate(), reservation.getCheckOutDate()));
+        }
+        
+        return reservedDateRanges;
+    }
+    public static class ReservedDateRange {
+        private LocalDate checkInDate;
+        private LocalDate checkOutDate;
+    
+        public ReservedDateRange(LocalDate checkInDate, LocalDate checkOutDate) {
+            this.checkInDate = checkInDate;
+            this.checkOutDate = checkOutDate;
+        }
+    
+        public LocalDate getCheckInDate() {
+            return checkInDate;
+        }
+    
+        public LocalDate getCheckOutDate() {
+            return checkOutDate;
+        }
     }
     
 }

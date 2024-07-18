@@ -20,8 +20,8 @@ public class Reservation {
     private LocalDate checkOutDate;
     private LocalTime checkOutTime;;
     private double total;
-    private Boolean available  = true;
-    private String status = "pending";
+    private Boolean available;
+    private String status;
 
 
 
