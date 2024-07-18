@@ -20,7 +20,7 @@ public class Reservation {
     private LocalDate checkOutDate;
     private LocalTime checkOutTime;;
     private double total;
-    private Boolean reserved  = true;
+    private Boolean available  = true;
     private String status = "pending";
 
 
@@ -30,7 +30,7 @@ public class Reservation {
 
 
     public Reservation(Long userAuthId, Long roomId, LocalDate checkInDate, LocalTime checkInTime, LocalDate checkOutDate, 
-    LocalTime checkOutTime, double total, Boolean reserved, String status) {
+    LocalTime checkOutTime, double total, Boolean available, String status) {
 
         this.userAuthId = userAuthId;
         this.roomId = roomId;
@@ -39,7 +39,7 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
         this.checkOutTime = checkOutTime;
         this.total = total;
-        this.reserved = reserved;
+        this.available = available;
         this.status = status;
     }
 
@@ -74,8 +74,8 @@ public class Reservation {
     public double getTotal() {
         return total;
     }
-    public Boolean getReserved() {
-        return reserved;
+    public Boolean isAvailable() {
+        return available;
     }
     public String getStatus() {
         return status;
@@ -108,8 +108,8 @@ public class Reservation {
     public void setTotal(double total) {
         this.total = total;
     }
-    public void setReserved(Boolean reserved) {
-        this.reserved = reserved;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public void setStatus(String status) {
