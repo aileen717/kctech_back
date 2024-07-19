@@ -20,7 +20,6 @@ public class Reservation {
     private LocalDate checkOutDate;
     private LocalTime checkOutTime;;
     private double total;
-    private Boolean available;
     private String status;
 
 
@@ -30,7 +29,7 @@ public class Reservation {
 
 
     public Reservation(Long userAuthId, Long roomId, LocalDate checkInDate, LocalTime checkInTime, LocalDate checkOutDate, 
-    LocalTime checkOutTime, double total, Boolean available, String status) {
+    LocalTime checkOutTime, double total, String status) {
 
         this.userAuthId = userAuthId;
         this.roomId = roomId;
@@ -39,7 +38,6 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
         this.checkOutTime = checkOutTime;
         this.total = total;
-        this.available = available;
         this.status = status;
     }
 
@@ -74,9 +72,7 @@ public class Reservation {
     public double getTotal() {
         return total;
     }
-    public Boolean isAvailable() {
-        return available;
-    }
+    
     public String getStatus() {
         return status;
     }
@@ -107,9 +103,6 @@ public class Reservation {
 
     public void setTotal(double total) {
         this.total = total;
-    }
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 
     public void setStatus(String status) {

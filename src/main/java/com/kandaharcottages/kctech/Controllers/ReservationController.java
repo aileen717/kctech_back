@@ -55,7 +55,6 @@ public String addReservation(@RequestBody Reservation newReservation) {
         return "The room is already reserved for the selected date(s).";
     }
 
-    newReservation.setAvailable(true);
     newReservation.setStatus("pending"); 
     
     repo.save(newReservation); 
