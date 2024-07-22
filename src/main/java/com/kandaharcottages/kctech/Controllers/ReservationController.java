@@ -1,6 +1,7 @@
 package com.kandaharcottages.kctech.Controllers;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class ReservationController {
 
     public ReservationController(ReservationRepository repo){
         this.repo = repo;
+        updateReservationStatusAutomatically();
     }
 
     @GetMapping("/all")
@@ -44,7 +46,7 @@ public class ReservationController {
     }
 
     @PostMapping("/new")
-public String addReservation(@RequestBody Reservation newReservation) {
+    public String addReservation(@RequestBody Reservation newReservation) {
     boolean isAvailable = repo.isRoomAvailable(
         newReservation.getRoomId(),
         newReservation.getCheckInDate(),
@@ -55,7 +57,7 @@ public String addReservation(@RequestBody Reservation newReservation) {
         return "The room is already reserved for the selected date(s).";
     }
 
-    newReservation.setStatus("pending"); 
+    newReservation.setStatus("Pending"); 
     
     repo.save(newReservation); 
     
@@ -63,20 +65,10 @@ public String addReservation(@RequestBody Reservation newReservation) {
 }
 
 
-
     @DeleteMapping("/delete/{id}")
     public String deleteReservation (@PathVariable Long id){
         repo.deleteById(id);
         return "The reservation is deleted.";
-    }
-
-    @GetMapping("/check")
-    public boolean checkRoomAvailability(
-        @RequestParam Long roomId,
-        @RequestParam LocalDate checkInDate,
-        @RequestParam LocalDate checkOutDate) {
-    
-        return repo.isRoomAvailable(roomId, checkInDate, checkOutDate);
     }
     
 
@@ -93,34 +85,22 @@ public String addReservation(@RequestBody Reservation newReservation) {
     
         return repo.save(existingReservation);
     }
+    
+    private void updateReservationStatusAutomatically() {
+        List<Reservation> reservations = repo.findAll();
+        LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
 
-    @GetMapping("/reservedDates")
-    public List<ReservedDateRange> getReservedDates(@RequestParam Long roomId) {
-        List<Reservation> reservations = repo.findByRoomId(roomId);
-        List<ReservedDateRange> reservedDateRanges = new ArrayList<>();
-        
         for (Reservation reservation : reservations) {
-            reservedDateRanges.add(new ReservedDateRange(reservation.getCheckInDate(), reservation.getCheckOutDate()));
+            LocalDate checkOutDate = reservation.getCheckOutDate();
+            LocalTime checkOutTime = reservation.getCheckOutTime();
+
+           
+            if ((checkOutDate.isBefore(today) || (checkOutDate.isEqual(today) && checkOutTime.isBefore(now))) &&
+                "pending".equals(reservation.getStatus())) {
+                reservation.setStatus("Completed");
+                repo.save(reservation);
+                }
+            }
         }
-        
-        return reservedDateRanges;
-    }
-    public static class ReservedDateRange {
-        private LocalDate checkInDate;
-        private LocalDate checkOutDate;
-    
-        public ReservedDateRange(LocalDate checkInDate, LocalDate checkOutDate) {
-            this.checkInDate = checkInDate;
-            this.checkOutDate = checkOutDate;
-        }
-    
-        public LocalDate getCheckInDate() {
-            return checkInDate;
-        }
-    
-        public LocalDate getCheckOutDate() {
-            return checkOutDate;
-        }
-    }
-    
 }
