@@ -109,4 +109,8 @@ public class Reservation {
         this.status = status;
     }
 
+    public void computeTotal(double price) {
+        throw new UnsupportedOperationException("Unimplemented method 'computeTotal'");
+    }
+
 }

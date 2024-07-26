@@ -12,14 +12,16 @@ public class Room {
     private Long id;
     private String name;
     private String pax;
+    private String description;
     private double price;
     private String url;
 
     public Room (){}
 
-    public Room(String name, String pax, double price, String url) {
+    public Room(String name, String pax, String description, double price, String url) {
         this.name = name;
         this.pax = pax;
+        this.description = description;
         this.price = price;
         this.url = url;
     }
@@ -37,6 +39,10 @@ public class Room {
         return pax;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -52,6 +58,10 @@ public class Room {
 
     public void setPax(String pax) {
         this.pax = pax;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setPrice(double price) {
