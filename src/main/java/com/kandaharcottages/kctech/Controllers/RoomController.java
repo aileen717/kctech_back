@@ -50,6 +50,7 @@ public class RoomController {
         .map(room -> {
             room.setName(newRoom.getName());
             room.setPax(newRoom.getPax());
+            room.setDescription(newRoom.getDescription());
             room.setPrice(newRoom.getPrice());
             room.setUrl(newRoom.getUrl());
             return repo.save(room);
