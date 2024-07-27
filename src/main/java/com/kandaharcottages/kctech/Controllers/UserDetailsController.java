@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.kandaharcottages.kctech.Model.UserAuth;
 import com.kandaharcottages.kctech.Model.UserDetails;
-import com.kandaharcottages.kctech.NotFoundException.UserDetailsNotFoundException;
 import com.kandaharcottages.kctech.Repository.UserAuthRepository;
 import com.kandaharcottages.kctech.Repository.UserDetailsRepository;
 
 @RestController
-@RequestMapping("/api/v1/userDetails")
+@RequestMapping("/api/v1/profile")
 public class UserDetailsController {
 
     UserDetailsRepository repo;
@@ -29,19 +27,16 @@ public class UserDetailsController {
         this.repo = repo;
         this.userAuthRepository = userAuthRepository;
         }
-    
+
+    // @GetMapping("/{id}")
+    // public Long getUserProfile(@PathVariable String email){
+    //     UserAuth userAuth = userAuthRepository.findByEmail(email);
+    //     return userAuth.getId();
+    // }
 
     @GetMapping("/all")
-    public List<UserDetails> getUserDetails(){
+    public List<UserDetails> getUserProfile(){
         return repo.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public UserDetails getUserDetails(@PathVariable Long id){
-        return repo.findById(id).orElseThrow(
-            () -> new UserDetailsNotFoundException(id)
-        );
-
     }
 
     @GetMapping("account/{email}")
@@ -63,10 +58,11 @@ public class UserDetailsController {
         return repo.save(newProfile);
     }
 
+
     @DeleteMapping("/delete/{id}")
-    public String deleteUserDetails (@PathVariable Long id){
+    public String deleteProfile(@PathVariable Long id) {
         repo.deleteById(id);
-        return "The user is deleted.";
+        return "Profile with ID " + id + " has been deleted";
     }
     
 }

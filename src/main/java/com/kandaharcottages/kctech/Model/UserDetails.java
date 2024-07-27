@@ -12,10 +12,11 @@ public class UserDetails {
     @Id
     @GeneratedValue
     private Long id;
+    private Long userAuthId;
     private String name;
     private String address;
     private String contact;
-    private Long userAuthId;
+
 
 public UserDetails(){}
 
