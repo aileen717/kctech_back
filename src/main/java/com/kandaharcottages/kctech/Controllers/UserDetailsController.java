@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kandaharcottages.kctech.Model.UserAuth;
 import com.kandaharcottages.kctech.Model.UserDetails;
+import com.kandaharcottages.kctech.NotFoundException.UserDetailsNotFoundException;
 import com.kandaharcottages.kctech.Repository.UserAuthRepository;
 import com.kandaharcottages.kctech.Repository.UserDetailsRepository;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 @RestController
 @RequestMapping("/api/v1/profile")
@@ -53,9 +57,27 @@ public class UserDetailsController {
         return profile;
     }
 
+    @GetMapping("email")
+    public Long getUserAccount(@PathVariable String email) {
+        UserAuth user = userAuthRepository.findByEmail(email);
+        return user.getId();
+    }
+    
+
     @PostMapping("/addinfo")
     public UserDetails createProfile(@RequestBody UserDetails newProfile) {
         return repo.save(newProfile);
+    }
+
+    @PutMapping("/edit/{id}")
+    public UserDetails updateProfile(@PathVariable Long id, @RequestBody UserDetails updatedProfile) {
+        return repo.findById(id)
+                .map(profile -> {
+                    profile.setContact(updatedProfile.getContact());
+                    profile.setAddress(updatedProfile.getAddress());
+                    return repo.save(profile);
+                })
+                .orElseThrow(() -> new UserDetailsNotFoundException(id));
     }
 
 

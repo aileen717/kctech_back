@@ -52,7 +52,7 @@ public class UserAuthController {
         }
 
         UserAuth userAuth =  new UserAuth(
-            registrationRequest.getUsername(),
+            passwordEncoder.encode(registrationRequest.getUsername()+ "kandahar"),
             registrationRequest.getEmail(),
             passwordEncoder.encode(registrationRequest.getPassword())
         );
