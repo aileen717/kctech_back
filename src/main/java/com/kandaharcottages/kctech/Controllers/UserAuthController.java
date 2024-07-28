@@ -111,10 +111,13 @@ public class UserAuthController {
         }
     }
 
-     @GetMapping("/{email}")
-    public Long getUserAccount(@PathVariable String email) {
-        UserAuth user = userAuthRepository.findByEmail(email);
-        return user.getId();
+    @GetMapping("/{email}")
+    public UserAuth getUserAccount(@PathVariable String email) {
+        UserAuth userAuth = userAuthRepository.findByEmail(email);
+        if (userAuth == null) {
+            throw new RuntimeException("User not found");
+        }
+        return userAuth;
     }
-}
+}   
 
