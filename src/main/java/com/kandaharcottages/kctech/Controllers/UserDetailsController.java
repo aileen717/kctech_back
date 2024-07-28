@@ -1,7 +1,6 @@
 package com.kandaharcottages.kctech.Controllers;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,8 +55,8 @@ public class UserDetailsController {
 
     @GetMapping("/{email}")
     public Long getUserAccount(@PathVariable String email) {
-        UserAuth user = userAuthRepository.findByEmail(email);
-        return user.getId();
+        UserAuth userAuth = userAuthRepository.findByEmail(email);
+        return userAuth.getId();
     }
     
 

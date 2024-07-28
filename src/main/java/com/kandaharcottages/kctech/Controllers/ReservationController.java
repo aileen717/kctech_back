@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kandaharcottages.kctech.Model.Reservation;
-import com.kandaharcottages.kctech.Model.Room;
 import com.kandaharcottages.kctech.NotFoundException.ReservationNotFoundException;
 import com.kandaharcottages.kctech.Repository.ReservationRepository;
 import com.kandaharcottages.kctech.Repository.RoomRepository;
@@ -61,10 +60,6 @@ public class ReservationController {
             return "The room is already reserved for the selected date(s).";
         }
 
-        Room room = roomRepo.findById(newReservation.getRoomId())
-            .orElseThrow(() -> new RuntimeException("Room not found"));
-
-        newReservation.computeTotal(room.getPrice());
         newReservation.setStatus("Pending");
         repo.save(newReservation);
 
