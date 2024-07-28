@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kandaharcottages.kctech.Model.Reservation;
-import com.kandaharcottages.kctech.Model.Room;
 import com.kandaharcottages.kctech.NotFoundException.ReservationNotFoundException;
 import com.kandaharcottages.kctech.Repository.ReservationRepository;
-import com.kandaharcottages.kctech.Repository.RoomRepository;
+
 
 @RestController
 @RequestMapping("/api/v1/reservation")
@@ -25,12 +24,10 @@ public class ReservationController {
 
 
     ReservationRepository repo;
-    RoomRepository roomRepo;
 
-    public ReservationController(ReservationRepository repo, RoomRepository roomRepo){
+    public ReservationController(ReservationRepository repo){
         this.repo = repo;
-        this.roomRepo = roomRepo;
-        // updateReservationStatusAutomatically();
+    
     }
 
     @GetMapping("/all")
@@ -46,7 +43,6 @@ public class ReservationController {
 
     }
 
-    
 
     @PostMapping("/new")
     public String addReservation(@RequestBody Reservation newReservation) {
@@ -61,10 +57,6 @@ public class ReservationController {
             return "The room is already reserved for the selected date(s).";
         }
 
-        Room room = roomRepo.findById(newReservation.getRoomId())
-            .orElseThrow(() -> new RuntimeException("Room not found"));
-
-        newReservation.computeTotal(room.getPrice());
         newReservation.setStatus("Pending");
         repo.save(newReservation);
 
@@ -93,21 +85,5 @@ public class ReservationController {
         return repo.save(existingReservation);
     }
     
-    // private void updateReservationStatusAutomatically() {
-    //     List<Reservation> reservations = repo.findAll();
-    //     LocalDate today = LocalDate.now();
-    //     LocalTime now = LocalTime.now();
 
-    //     for (Reservation reservation : reservations) {
-    //         LocalDate checkOutDate = reservation.getCheckOutDate();
-    //         LocalTime checkOutTime = reservation.getCheckOutTime();
-
-           
-    //         if ((checkOutDate.isBefore(today) || (checkOutDate.isEqual(today) && checkOutTime.isBefore(now))) &&
-    //             "pending".equals(reservation.getStatus())) {
-    //             reservation.setStatus("Completed");
-    //             repo.save(reservation);
-    //             }
-    //         }
-    //     }
 }
