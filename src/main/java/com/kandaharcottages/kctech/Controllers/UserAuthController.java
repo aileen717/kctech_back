@@ -10,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +54,7 @@ public class UserAuthController {
         }
 
         UserAuth userAuth =  new UserAuth(
-            passwordEncoder.encode(registrationRequest.getUsername()+ "kandahar"),
+            registrationRequest.getUsername(),
             registrationRequest.getEmail(),
             passwordEncoder.encode(registrationRequest.getPassword())
         );
@@ -78,7 +80,7 @@ public class UserAuthController {
         }
 
         UserAuth userAuth =  new UserAuth(
-            registrationRequest.getUsername(),
+            passwordEncoder.encode(registrationRequest.getUsername()+ "kandahar"),
             registrationRequest.getEmail(),
             passwordEncoder.encode(registrationRequest.getPassword())
         );
@@ -107,6 +109,12 @@ public class UserAuthController {
         }catch (Exception e){
             return new ResponseEntity<>(e.toString(), HttpStatus.OK);
         }
+    }
+
+     @GetMapping("/{email}")
+    public Long getUserAccount(@PathVariable String email) {
+        UserAuth user = userAuthRepository.findByEmail(email);
+        return user.getId();
     }
 }
 

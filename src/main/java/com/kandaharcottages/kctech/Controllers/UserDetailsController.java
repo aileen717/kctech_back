@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/v1/profile")
 public class UserDetailsController {
 
-    UserDetailsRepository repo;
-    UserAuthRepository userAuthRepository;
+    private final UserDetailsRepository repo;
+    private final UserAuthRepository userAuthRepository;
 
     public UserDetailsController(UserDetailsRepository repo, UserAuthRepository userAuthRepository) {
         this.repo = repo;
@@ -38,10 +38,7 @@ public class UserDetailsController {
     //     return userAuth.getId();
     // }
 
-    @GetMapping("/all")
-    public List<UserDetails> getUserProfile(){
-        return repo.findAll();
-    }
+    
 
     @GetMapping("account/{email}")
     public HashMap<String, String>getMail(@PathVariable String email) {
@@ -57,7 +54,7 @@ public class UserDetailsController {
         return profile;
     }
 
-    @GetMapping("email")
+    @GetMapping("/{email}")
     public Long getUserAccount(@PathVariable String email) {
         UserAuth user = userAuthRepository.findByEmail(email);
         return user.getId();
